@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Ahorro - Búho MAP</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .form-section, .result-section {
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .result-box {
+      background: #ecf0f1;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculadora de Ahorro con Búho MAP</h1>
+  <div class="form-section">
+    <label>Cantidad de lotes</label>
+    <input type="number" id="lotes">
+
+    <label>Cantidad de asesores</label>
+    <input type="number" id="asesores">
+
+    <label>Visitas al loteo por mes</label>
+    <input type="number" id="visitas">
+
+    <label>Duración estimada del proyecto (meses)</label>
+    <input type="number" id="meses">
+
+    <label>¿Utiliza sistema digital actualmente?</label>
+    <select id="digital">
+      <option value="sí">Sí</option>
+      <option value="no">No</option>
+    </select>
+
+    <label>Valor estimado de la hora de un asesor (en ARS o USD)</label>
+    <input type="number" id="valorHora">
+
+    <button onclick="calcular()">Calcular ahorro</button>
+  </div>
+
+  <div class="result-section" id="resultados" style="display:none">
+    <h2>Resultados estimados</h2>
+    <div class="result-box" id="horas"></div>
+    <div class="result-box" id="costo"></div>
+    <div class="result-box" id="aceleracion"></div>
+    <p>🎯 Con Búho MAP podrías ahorrar tiempo, dinero y acelerar tu proceso de ventas inmobiliarias.</p>
+    <button onclick="window.location.href='https://buhomap.com.ar/contacto'">Solicitá una demo gratuita</button>
+  </div>
+
+  <script>
+    function calcular() {
+      const lotes = parseInt(document.getElementById("lotes").value);
+      const asesores = parseInt(document.getElementById("asesores").value);
+      const visitas = parseInt(document.getElementById("visitas").value);
+      const meses = parseInt(document.getElementById("meses").value);
+      const valorHora = parseFloat(document.getElementById("valorHora").value);
+
+      if (isNaN(lotes) || isNaN(asesores) || isNaN(visitas) || isNaN(meses) || isNaN(valorHora)) {
+        alert("Por favor completá todos los campos correctamente.");
+        return;
+      }
+
+      const horas_ahorradas = (visitas * 2 * meses) + (asesores * 3 * meses);
+      const costo_ahorrado = horas_ahorradas * valorHora;
+      const aceleracion = meses * 0.25;
+
+      document.getElementById("horas").innerText = `🕒 Horas ahorradas: ${horas_ahorradas} h`;
+      document.getElementById("costo").innerText = `💰 Costo estimado ahorrado: ${costo_ahorrado.toLocaleString()} (${valorHora} por hora)`;
+      document.getElementById("aceleracion").innerText = `🚀 Tiempo estimado de aceleración: ${aceleracion.toFixed(1)} meses`;
+
+      document.getElementById("resultados").style.display = 'block';
+    }
+  </script>
+</body>
+</html>
